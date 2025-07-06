@@ -1,0 +1,28 @@
+alias ..="cd .."
+alias ...="cd ../.."
+
+alias ll="ls -alF"
+alias la="ls -A"
+alias l="ls -CF"
+
+alias gi="git init && git commit -a -m 'Initial commit'"
+alias gp="git push"
+alias gf="git fetch"
+alias gm="git merge"
+
+alias ga="git add"
+alias gc="git commit -v"
+alias gcm="git commit -m"
+
+alias gd="git diff"
+alias gdn="git diff --name-only"
+alias gdc="git diff --cached"
+
+alias gs="git status -s"
+alias gl="git log --pretty=format:'%C(yellow)%h %ad%C(red)%d %Creset%s%Cblue' --date=short"
+
+alias gb="git branch"
+alias gco="git checkout"
+alias gcob="git checkout -b"
+
+alias nv=nvim
