@@ -1,8 +1,8 @@
 return {
-	"OXY2DEV/markview.nvim",
-	ft = { "markdown" },
-	dependencies = {
+  "MeanderingProgrammer/render-markdown.nvim",
+  dependencies = {
 		"nvim-treesitter/nvim-treesitter",
-	  "nvim-tree/nvim-web-devicons"
-	}
+		"echasnovski/mini.nvim"
+	},
+  opts = {}
 }

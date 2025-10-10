@@ -1,5 +1,6 @@
 local cmp = require "cmp"
 local luasnip = require "luasnip"
+luasnip.config.setup {}
 
 -- Better completion
 vim.o.completeopt = "menuone,noselect"
@@ -27,6 +28,9 @@ cmp.setup {
 		end, {"i", "s"})
 	},
 	sources = {
-		{ name = "nvim_lsp", group_index = 2 },
+    { name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+		{ name = "path" },
 	}
 }
