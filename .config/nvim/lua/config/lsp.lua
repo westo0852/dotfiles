@@ -1,4 +1,5 @@
-local nvim_lsp = require("lspconfig")
+-- local nvim_lsp = require("lspconfig")
+require("lspconfig")
 
 local on_attach = function(client, bufnr)
   local nmap = function(keys, func, desc)
@@ -28,7 +29,8 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Enable LSPs
 local function default_lsp_setup(module)
-  nvim_lsp[module].setup({on_attach = on_attach, capabilities = capabilities})
+  vim.lsp.config(module, {on_attach = on_attach, capabilities = capabilities})
+  vim.lsp.enable({module})
 end
 
 default_lsp_setup("pyright") -- python
