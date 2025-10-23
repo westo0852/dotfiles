@@ -8,7 +8,8 @@ return {
 			ensure_installed = {
 				"python",
 				"java",
-				"lua"
+				"lua",
+        "markdown"
 			},
 			highlight = { enable = true },
 			indent = { enable = true },
