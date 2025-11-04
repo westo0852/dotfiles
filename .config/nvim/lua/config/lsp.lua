@@ -1,4 +1,3 @@
--- local nvim_lsp = require("lspconfig")
 require("lspconfig")
 
 local on_attach = function(client, bufnr)
@@ -27,11 +26,37 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Enable LSPs
 local function default_lsp_setup(module)
   vim.lsp.config(module, {on_attach = on_attach, capabilities = capabilities})
-  vim.lsp.enable({module})
+  vim.lsp.enable(module)
 end
 
-default_lsp_setup("pyright") -- python
-default_lsp_setup("gopls")   -- golang
+-- Python
+default_lsp_setup("pyright")
+
+-- Golang
+default_lsp_setup("gopls")
+
+-- Lua
+vim.lsp.config("lua_ls", {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+
+        -- Find Lua modules the same way as nvim, see :h lua-module-load
+        path = {
+          "lua/?.lua",
+          "lua/?/init.lua",
+        },
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = { vim.env.VIMRUNTIME }
+      }
+    }
+  }
+})
+vim.lsp.enable("lua_ls")

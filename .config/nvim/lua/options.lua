@@ -11,8 +11,10 @@ vim.opt.shiftwidth = 2
 -- Disable comment leader continuation. See :help fo-table
 vim.opt.formatoptions:remove { "r", "o" }
 
+local wsl = vim.fn.has("wsl") == 1
+
 -- https://mitchellt.com/2022/05/15/WSL-Neovim-Lua-and-the-Windows-Clipboard.html
-if os.getenv("WSL_DISTRO_NAME") ~= nil and vim.fn.executable("win32yank") == 1 then
+if wsl and vim.fn.executable("win32yank") == 1 then
   vim.g.clipboard = {
     name = "wslClipboard",
     copy = {
@@ -23,7 +25,14 @@ if os.getenv("WSL_DISTRO_NAME") ~= nil and vim.fn.executable("win32yank") == 1 t
       ["+"] = "win32yank -o --lf",
       ["*"] = "win32yank -o --lf",
     },
-    cache_enabled = true 
+    cache_enabled = true
   }
 end
 vim.opt.clipboard = "unnamedplus"
+
+if wsl then
+  vim.keymap.set("n", "gx", function()
+    local url = vim.fn.expand("<cfile>")
+    vim.fn.system({ "wsl-open", url })
+  end, { desc = "Open URL under cursor" })
+end

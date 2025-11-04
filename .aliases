@@ -26,3 +26,5 @@ alias gco="git checkout"
 alias gcob="git checkout -b"
 
 alias nv=nvim
+
+alias activate="source .venv/bin/activate"
