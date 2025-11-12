@@ -18,13 +18,14 @@ return {
       },
       highlight = { enable = true },
       indent = { enable = true },
+      -- Swapped with tmux prefix key: Ctrl+space <-> Ctrl+A
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<C-space>",
-          scope_incremental = false,
-          node_incremental = "<C-space>",
+          init_selection   = "<c-a>",
+          node_incremental = "<c-a>",
           node_decremental = "<bs>",
+          scope_incremental = false,
         }
       }
     })

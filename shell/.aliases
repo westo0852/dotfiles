@@ -27,4 +27,8 @@ alias gcob="git checkout -b"
 
 alias nv=nvim
 
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -selection clipboard -o"
+
 alias activate="source .venv/bin/activate"
+alias unstow="stow -D"

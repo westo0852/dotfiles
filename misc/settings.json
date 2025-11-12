@@ -1,0 +1,85 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [],
+    "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+    "keybindings": [],
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "colorScheme": "dayfox",
+            "font": 
+            {
+                "face": "MesloLGS NF",
+                "size": 16
+            },
+            "padding": "4"
+        },
+        "list": 
+        [
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": true,
+                "name": "Command Prompt"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": true,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{d19bcdd0-cc72-5191-beff-79de4afb99ac}",
+                "hidden": true,
+                "name": "Docker Desktop WSL",
+                "source": "Microsoft.WSL"
+            }
+        ]
+    },
+    "schemes": 
+    [
+        {
+            "name": "dayfox",
+            "background": "#F6F2EE",
+            "black": "#352C24",
+            "blue": "#2848A9",
+            "brightBlack": "#534C45",
+            "brightBlue": "#4863B6",
+            "brightCyan": "#488D93",
+            "brightGreen": "#577F63",
+            "brightPurple": "#8452D5",
+            "brightRed": "#B3434E",
+            "brightWhite": "#F4ECE6",
+            "brightYellow": "#B86E28",
+            "cursorColor": "#3D2B5A",
+            "cyan": "#287980",
+            "foreground": "#3D2B5A",
+            "green": "#396847",
+            "purple": "#6E33CE",
+            "red": "#A5222F",
+            "selectionBackground": "#E7D2BE",
+            "white": "#F2E9E1",
+            "yellow": "#AC5402"
+        }
+    ],
+    "theme": "light",
+    "themes": []
+}
