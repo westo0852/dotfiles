@@ -1,3 +1,4 @@
+-- Options
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -11,9 +12,33 @@ vim.opt.shiftwidth = 2
 -- Disable comment leader continuation. See :help fo-table
 vim.opt.formatoptions:remove { "r", "o" }
 
+-- Keymaps
+vim.keymap.set("n", "<ESC>", ":noh<CR>", { desc = "Clear search highlighting", silent = true })
+
+-- Autotoggle relative line numbers based on context
+-- https://www.reddit.com/r/neovim/comments/y0c9vk/comment/irrgfin/
+local numbertogglegroup = vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd({ "InsertLeave" }, {
+  pattern = "*",
+  callback = function()
+    vim.wo.relativenumber = true
+  end,
+  group = numbertogglegroup,
+})
+
+autocmd({ "InsertEnter" }, {
+  pattern = "*",
+  callback = function()
+    vim.wo.relativenumber = false
+  end,
+  group = numbertogglegroup,
+})
+
 local wsl = vim.fn.has("wsl") == 1
 
--- https://mitchellt.com/2022/05/15/WSL-Neovim-Lua-and-the-Windows-Clipboard.html
+-- Use win32yank to sync Windows/WSL clipboards
 if wsl and vim.fn.executable("win32yank") == 1 then
   vim.g.clipboard = {
     name = "wslClipboard",
@@ -30,6 +55,7 @@ if wsl and vim.fn.executable("win32yank") == 1 then
 end
 vim.opt.clipboard = "unnamedplus"
 
+-- Open URLs with wsl-open
 if wsl then
   vim.keymap.set("n", "gx", function()
     local url = vim.fn.expand("<cfile>")

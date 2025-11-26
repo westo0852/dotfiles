@@ -1,9 +1,6 @@
 -- Package manager
 require("config.lazy")
 
+require("config.options")
 require("config.lsp")
 require("config.cmp")
-
-require("keymaps")
-require("options")
-require("misc")
