@@ -7,7 +7,8 @@ require("mason-lspconfig").setup({
 		"gopls",
 		"pyright",
 		"clangd",
-		-- "jdtls",
+		"jdtls",
+		"bashls",
 	},
 	automatic_installation = false,
 })
@@ -22,6 +23,7 @@ require("mason-tool-installer").setup({
 		"prettier",
 		"black",
 		"clang-format",
+		"shellcheck",
 	},
 	run_on_start = false, -- Use :MasonToolsUpdate or :MasonToolsInstall
 })
@@ -70,6 +72,9 @@ default_lsp_setup("clangd")
 
 -- Python
 default_lsp_setup("pyright")
+
+-- Bash
+default_lsp_setup("bashls")
 
 -- Lua
 vim.lsp.config("lua_ls", {
