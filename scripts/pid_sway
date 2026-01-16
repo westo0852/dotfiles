@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Safe bash scripts!
+set -euo pipefail
+
+# I found this helpful: https://unix.stackexchange.com/a/776337
+sleep 5
+swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true) | .pid'

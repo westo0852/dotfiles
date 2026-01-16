@@ -5,7 +5,7 @@
 	email = 140355250+westo0852@users.noreply.github.com
 [core]
 	editor = nvim
-	excludesfile = ~/.gitignore
+	excludesfile = /home/iw/.gitignore
 	pager = diff-so-fancy | less --tabs=4 -RF
 [interactive]
 	diffFilter = diff-so-fancy --patch

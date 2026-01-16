@@ -1,12 +1,10 @@
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input must go above this block.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-# Set up the prompt
-# autoload -Uz promptinit
-# promptinit
 
 setopt histignorealldups sharehistory inc_append_history
 bindkey -e
@@ -44,29 +42,14 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # End of Powerlevel10k setup
 export PATH="$HOME/.local/bin:$PATH"
 
-# Homebrew
-[[ ! -f "/home/linuxbrew/.linuxbrew/bin/brew shellenv)" ]] || eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Node
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
 # Golang!
-if [[ -d "/usr/local/go" ]]; then
-  export PATH=$PATH:/usr/local/go/bin
-fi
+# if [[ -d "/usr/local/go" ]]; then
+#   export PATH=$PATH:/usr/local/go/bin
+# fi
 # export GOPATH=$HOME/go
 # export PATH=$PATH:$GOPATH/bin
 
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
-
-# Hide output so p10k doesn't complain
-/usr/bin/keychain --nogui ~/.ssh/id_ed25519 > /dev/null 2>&1
-if [[ -f $HOME/.keychain/$HOST-sh ]]; then
-    source $HOME/.keychain/$HOST-sh > /dev/null 2>&1
-fi
+export PATH="$HOME/.local/nvim-v0.12/bin:$PATH"
 
 [[ ! -f ~/.aliases ]] || source ~/.aliases
 

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+path=$(command -v pacman-key)
+
+# See https://wiki.archlinux.org/title/Unofficial_user_repositories#g14
+# and https://asus-linux.org/guides/arch-guide/ under heading "Repo"
+
+if "$path" &>/dev/null; then
+  echo "Found pacman-key at path='$path'. Proceeding to add sign key for g14"
+fi
+
+# Requires sudo
+
+pacman-key --recv-keys 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+pacman-key --lsign-key 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+
+# Then can run yay -S asusctl

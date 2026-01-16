@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+for device in /sys/class/hwmon/hwmon*; do
+  if [ -f "$device/name" ]; then
+    name=$(cat "$device/name")
+    id=$(basename "$device")
+    printf "%-7s -> %s\n" "$id" "$name"
+  fi
+done
