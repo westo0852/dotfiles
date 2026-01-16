@@ -1,11 +1,28 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	lazy = false,
 	build = ":TSUpdate",
-	-- Load treesitter when opening a buffer
-	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = {
+		-- No need for require("nvim-treesitter").setup() if using default settings
+		require("nvim-treesitter").install({
+			"vimdoc",
+			"lua",
+			"go",
+			"java",
+			"c",
+			"cpp",
+			"rust",
+			"javascript",
+			"python",
+			"markdown",
+			"markdown_inline",
+			"html",
+			"latex",
+			"json",
+		})
+
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = {
 				"vimdoc",
 				"lua",
 				"go",
@@ -21,18 +38,10 @@ return {
 				"latex",
 				"json",
 			},
-			highlight = { enable = true },
-			indent = { enable = true },
-			-- Swapped with tmux prefix key: Ctrl+space <-> Ctrl+A
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<c-a>",
-					node_incremental = "<c-a>",
-					node_decremental = "<bs>",
-					scope_incremental = false,
-				},
-			},
+			callback = function()
+				vim.treesitter.start()
+				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			end,
 		})
 	end,
 }
