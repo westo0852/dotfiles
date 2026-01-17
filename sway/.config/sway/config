@@ -25,15 +25,19 @@ output * bg /home/iw/Downloads/wallpaper.png fill
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration
-
-exec swayidle -w \
-  timeout 300 'swaylock -f -c 000000' \
-  timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-    before-sleep 'swaylock -f -c 000000'
+# swaylock/pam.c for pam_authenticate
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
+
+exec swayidle -w \
+  timeout 300 'swaylock -f -c 000000' \
+  timeout 600 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock -f -c 000000'
+
+# TODO Add keymaps for manual lock and suspend
 
 ### Input configuration
 
