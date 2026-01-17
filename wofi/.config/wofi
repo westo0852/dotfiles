@@ -1,0 +1,15 @@
+# Window Settings
+width=600
+height=350
+location=center
+always_parse_args=true
+show_all=true
+print_command=true
+
+# Behavior
+insensitive=true
+prompt=Search for apps
+lines=10
+
+# Disable icons
+allow_images=false

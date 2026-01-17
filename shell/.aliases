@@ -27,5 +27,11 @@ alias gcob="git checkout -b"
 
 alias unstow="stow -D"
 alias nv=nvim
-alias pbcopy="xclip -selection clipboard"
-alias pbpaste="xclip -selection clipboard -o"
+
+alias tmux-a="tmux attach -t dev"
+alias tmux-n="tmux new -s dev"
+
+if command -v xclip &>/dev/null; then
+  alias pbcopy="xclip -selection clipboard"
+  alias pbpaste="xclip -selection clipboard -o"
+fi

@@ -14,8 +14,7 @@ using stow
 - [x] nodejs + npm
 - [x] lsp's with mason
 - [x] review plugins: `nvim -p nvim/.config/nvim/lua/plugins/*.lua`
-- [ ] stow git
-- [ ] make stuff prettier:
-    - [ ] tmux bar is ugly rn
-    - [ ] p10k and swaybar colours
-    - [ ] add more info to swaybar
+- [x] stow git
+- [x] wmenu-run to wofi --show drun ...
+- [x] more info in swaybar + better colours
+- [ ] ssh agent: see ~/.ssh/config and ssh-agent with SSH_AGENT_SOCK exported in ~/.zshrc

@@ -11,7 +11,7 @@ set $right l
 # Your preferred terminal emulator
 set $term foot
 # Your preferred application launcher
-set $menu wmenu-run
+set $menu wofi --show drun --conf ~/.config/wofi --style ~/.config/wofi.css
 
 ### Output configuration
 
@@ -221,10 +221,9 @@ bar {
 
     # TODO Make it pretty
     colors {
-        statusline #E974D6
-        background #323232
-        focused_workspace #E974D6 #E974D6 #FFFFFF
-        #focused_workspace #c4a7e7 #ccb1ed #FFFFFF
+        statusline #E093AE
+        background #434343
+        focused_workspace #D56B90 #D56B90 #FFFFFF
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
     font pango:JetBrainsMono Nerd Font 14
@@ -237,6 +236,6 @@ bar {
 
 # Pretty stuff like colours!
 font pango:JetBrainsMono Nerd Font Italic 16
-client.focused #E974D6 #C683F3 #FFFFFF
+client.focused #D56B90 #E093AE #FFFFFF        
 
 include /etc/sway/config.d/*

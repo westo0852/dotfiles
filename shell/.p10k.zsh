@@ -161,13 +161,15 @@
     typeset -g POWERLEVEL9K_EMPTY_LINE_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='%{%}'
   fi
 
-  # Default background color.
-  typeset -g POWERLEVEL9K_BACKGROUND=224
+  # Default background color
+  # Previously 224 but now empty!
+  typeset -g POWERLEVEL9K_BACKGROUND=
 
+  # Previously '%244F\u2502' for as left and right subsegment separator
   # Separator between same-color segments on the left.
-  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%244F\u2502'
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=''
   # Separator between same-color segments on the right.
-  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%244F\u2502'
+  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=''
   # Separator between different-color segments on the left.
   typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
   # Separator between different-color segments on the right.
@@ -175,10 +177,11 @@
   # To remove a separator between two segments, add "_joined" to the second segment name.
   # For example: POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(os_icon context_joined)
 
+  # Previously used '\uE0B0' for right prompt start symbol and left prompt end symbol
   # The right end of left prompt.
-  typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B0'
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
   # The left end of right prompt.
-  typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0B2'
+  typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
   # The left end of left prompt.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
   # The right end of right prompt.
@@ -217,19 +220,17 @@
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
-  # iw: I changed this to match POWERLEVEL9K_DIR_ANCHOR_FOREGROUND
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=009
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=205
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
-  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=009
+  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=205
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  # iw: Previously 39 which I really didn't like
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=009
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=205
   # Display anchor directory segments in bold.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   # Don't shorten directories that contain any of these files. They are anchors.

@@ -49,6 +49,8 @@ export PATH="$HOME/.local/bin:$PATH"
 # export GOPATH=$HOME/go
 # export PATH=$PATH:$GOPATH/bin
 
+export SSH_AUTH_SOCKET="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 export PATH="$HOME/.local/nvim-v0.12/bin:$PATH"
 
 [[ ! -f ~/.aliases ]] || source ~/.aliases
