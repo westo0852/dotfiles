@@ -4,8 +4,9 @@ set -euo pipefail
 
 TEX_INPUT=resume.tex
 if [[ $# -eq 1 ]]; then TEX_INPUT="$1"; fi
+echo "About to compile $TEX_INPUT to pdf..."
 pdflatex "$TEX_INPUT"
 
 PDF_OUTPUT="${TEX_INPUT%.tex}.pdf"
-echo "Opening $PDF_OUTPUT in browser..."
-qutebrowser "$PDF_OUTPUT"
+echo "About to open $PDF_OUTPUT with zathura..."
+zathura "$PDF_OUTPUT"
