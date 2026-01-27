@@ -7,6 +7,7 @@ identity="$USER@$HOSTNAME"
 cpu="$(top -bn2 -d 1 | grep "Cpu(s)" | tail -1 | awk '{print 100 - $8}')"
 
 ssid=$(command -v iwgetid &>/dev/null && iwgetid -r || "unknown")
+ipv4=$(ip addr show wlan0 | rg "inet " | awk '{print $2}' | cut -d"/" -f1)
 
 received=$(cat /sys/class/net/wlan0/statistics/rx_bytes | numfmt --to=iec-i)
 transmitted=$(cat /sys/class/net/wlan0/statistics/tx_bytes | numfmt --to=iec-i)
@@ -20,16 +21,17 @@ light=$(awk "BEGIN {print $brightness / $max_brightness * 100}")
 
 volume=$(amixer sget Master | awk -F"[][]" '/Left:/ {print $2}')
 
-datetime=$(date "+%a %d-%m-%+4Y %T")
+datetime=$(date "+%A %+4Y-%m-%d %H:%M")
 
 entries=(
-  "$identity"
-  "CPU: $cpu%"
-  "Power: $capacity% ($status)"
-  "Light: $light%"
+  # "CPU: $cpu%"
   "Volume: $volume"
-  "WiFi: $ssid"
-  "$received down, $transmitted up"
+  "Light: $light%"
+  "Power: $capacity% ($status)"
+  # "WiFi: $ssid" ($ipv4)
+  "$ssid"
+  # "$received down, $transmitted up"
+  "$identity"
   "$datetime"
 )
 

@@ -1,8 +1,8 @@
 # Copy this to ~/.config/sway/config and edit it to your liking.
 # Read `man 5 sway` for a complete reference.
 
-# Logo key. Use Mod1 for Alt.
-set $mod Mod4
+# Logo key. Use Mod1 for Alt because Mod4 is fucked
+set $mod Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -52,7 +52,10 @@ exec swayidle -w \
 #   input type:keyboard {
 #       xkb_layout "eu"
 #   }
-
+  # input "type:keyboard" {
+  #     xkb_layout "us"
+  #     xkb_options "fix-asus(super_remap)"
+  # }
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
 
@@ -217,7 +220,7 @@ bar {
     # status_edge_padding 12
 
     # When the status_command prints a new line to stdout, swaybar updates.
-    status_command while ~/.config/sway/status.sh; do sleep 1; done
+    status_command while ~/.config/sway/status.sh; do sleep 5; done
 
     # TODO Make it pretty
     colors {
@@ -233,6 +236,10 @@ bar {
 # exec wl-paste --type text --watch cliphist store
 # exec wl-paste --type image --watch cliphist store
 # bindsym $mod+v exec cliphist list | dmenu | cliphist decode | wl-copy
+
+# Take screenshot and save it to pics dir and clipboard
+bindsym $mod+Control+4 exec grim -g "$(slurp)" - | \
+  tee "~/pics/screenshot_$(date '+%Y%m%d-%H%M%S').png" | wl-copy
 
 # Pretty stuff like colours!
 font pango:JetBrainsMono Nerd Font Italic 16

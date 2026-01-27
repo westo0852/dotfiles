@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+TEX_INPUT=resume.tex
+if [[ $# -eq 1 ]]; then TEX_INPUT="$1"; fi
+pdflatex "$TEX_INPUT"
+
+PDF_OUTPUT="${TEX_INPUT%.tex}.pdf"
+echo "Opening $PDF_OUTPUT in browser..."
+qutebrowser "$PDF_OUTPUT"

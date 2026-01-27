@@ -17,4 +17,6 @@ using stow
 - [x] stow git
 - [x] wmenu-run to wofi --show drun ...
 - [x] more info in swaybar + better colours
-- [ ] ssh agent: see ~/.ssh/config and ssh-agent with SSH_AGENT_SOCK exported in ~/.zshrc
+- [ ] LSP capabilities
+- [ ] screen share; perms pop-up?
+- [ ] low battery warning

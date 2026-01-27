@@ -6,6 +6,13 @@
 
 config_version: 2
 settings:
+  content.headers.user_agent:
+    https://accounts.google.com/*: Mozilla/5.0 ({os_info}; rv:135.0) Gecko/20100101
+      Firefox/135
   content.javascript.clipboard:
+    https://aur.archlinux.org: access-paste
+    https://gemini.google.com: access-paste
     https://github.com: access-paste
     https://unix.stackexchange.com: access-paste
+  content.notifications.enabled:
+    https://www.youtube.com: false
