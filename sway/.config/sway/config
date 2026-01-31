@@ -87,6 +87,10 @@ exec swayidle -w \
       -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
       -B 'Yes, exit sway' 'swaymsg exit'
 
+    bindsym $mod+Control+f exec thunar
+
+exec --no-startup-id thunar --daemon
+
 # Moving around:
 
     # Move your focus around
@@ -239,7 +243,7 @@ bar {
 
 # Take screenshot and save it to pics dir and clipboard
 bindsym $mod+Control+4 exec grim -g "$(slurp)" - | \
-  tee "~/pics/screenshot_$(date '+%Y%m%d-%H%M%S').png" | wl-copy
+  tee "$HOME/pics/screenshot_$(date '+%Y%m%d-%H%M%S').png" | wl-copy
 
 # Pretty stuff like colours!
 font pango:JetBrainsMono Nerd Font Italic 16

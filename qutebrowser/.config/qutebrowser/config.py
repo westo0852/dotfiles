@@ -5,8 +5,8 @@ c.content.geolocation = False
 
 # Stolen from https://github.com/BreadOnPenguins/dots
 c.url.searchengines = {
-    "DEFAULT": "https://duckduckgo.com/?q={}",
-    "!goog": "https://www.google.com/search?q={}",
+    "DEFAULT": "https://www.google.com/search?q={}",
+    "!ddg": "https://duckduckgo.com/?q={}",
     "!wiki": "https://en.wikipedia.org/w/index.php?search={}",
     "!wiktionary": "https://en.wiktionary.org/w/index.php?search={}",
     "!a": "https://wiki.archlinux.org/?search={}",
