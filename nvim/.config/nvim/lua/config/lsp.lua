@@ -48,7 +48,7 @@ local on_attach = function(client, bufnr)
 	nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 	nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-	nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+	-- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 	nmap("<leader>g?", vim.diagnostic.open_float, "Show error message in floating window")
 end
 

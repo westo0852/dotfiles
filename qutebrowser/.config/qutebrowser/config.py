@@ -2,6 +2,10 @@ c.auto_save.session = True
 
 c.content.cookies.accept = "no-unknown-3rdparty"
 c.content.geolocation = False
+c.content.notifications.enabled = False
+
+# See https://github.com/qutebrowser/qutebrowser/issues/5182
+c.content.headers.user_agent = "Mozilla/5.0 ({os_info}; rv:135.0) Gecko/20100101 Firefox/135"
 
 # Stolen from https://github.com/BreadOnPenguins/dots
 c.url.searchengines = {
@@ -25,11 +29,16 @@ c.fonts.completion.category = "14pt 'JetBrainsMono Nerd Font'"
 c.fonts.completion.entry = "14pt 'JetBrainsMono Nerd Font'"
 c.fonts.debug_console = "14pt 'JetBrainsMono Nerd Font'"
 
+# c.tabs.tree_tabs = True
+
 c.tabs.position = "left"
 c.tabs.width = 400
 c.tabs.favicons.show = "never"
 c.tabs.indicator.width = 0
 c.tabs.title.format = "{index} {current_title}"
+
+c.tabs.new_position.related = "next"
+c.tabs.new_position.unrelated = "first"
 
 # idk why QssColor when others are QtColor
 # see qute://help/settings.html#colors.tabs.bar.bg
@@ -47,4 +56,4 @@ c.colors.webpage.darkmode.policy.images = "never"
 config.load_autoconfig()
 
 # Keybindings
-# config.bind()
+config.bind(",so", "config-source")

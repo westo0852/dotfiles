@@ -27,10 +27,11 @@ local on_attach = function(client, bufnr)
 	nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 	nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-	nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+	-- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 	nmap("<leader>g?", vim.diagnostic.open_float, "Show error message in floating window")
 end
 
+-- Assume project root where any of these are
 local project_root = require("jdtls.setup").find_root({
 	"gradlew",
 	"mvnw",
@@ -49,11 +50,13 @@ local project_name = vim.fn.fnamemodify(project_root, ":p:t")
 local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspaces/" .. project_name
 
 local config = {
-	-- Simply call jdtls script for now, can tune later
+	-- Call jdtls script + lombok for code gen in spring projects
+	-- TODO Try other GCs?
 	cmd = {
 		"jdtls",
 		"-data",
 		workspace_dir,
+		"--jvm-arg=-javaagent:" .. vim.fn.expand("~/.local/share/nvim/mason/packages/jdtls/lombok.jar"),
 	},
 	root_dir = project_root,
 	on_attach = on_attach,

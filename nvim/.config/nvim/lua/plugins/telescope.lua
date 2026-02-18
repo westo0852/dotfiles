@@ -27,6 +27,7 @@ return {
 						preview_cutoff = 0,
 					},
 				},
+				path_display = "shorten",
 			},
 			-- View dots but not gitignored files
 			pickers = {

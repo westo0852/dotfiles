@@ -1,15 +1,14 @@
 return {
 	{
-		"williamboman/mason.nvim",
-		build = ":MasonUpdate",
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"neovim/nvim-lspconfig",
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
-	},
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		config = function()
+			require("config.lsp")
+		end,
 	},
 }

@@ -1,11 +1,8 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	branch = "master",
-
 	build = ":TSUpdate",
 	-- Load treesitter when opening a buffer
 	event = { "BufReadPre", "BufNewFile" },
-
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
@@ -24,20 +21,18 @@ return {
 				"latex",
 				"json",
 			},
-
 			highlight = { enable = true },
 			indent = { enable = true },
-
-			-- Swapped with tmux prefix key: Ctrl+space <-> Ctrl+A
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<c-a>",
-					node_incremental = "<c-a>",
-					node_decremental = "<bs>",
-					scope_incremental = false,
-				},
-			},
+			-- TODO Enable with treesitter-modules
+			-- incremental_selection = {
+			-- 	enable = true,
+			-- 	keymaps = {
+			-- 		init_selection = "<c-a>",
+			-- 		node_incremental = "<c-a>",
+			-- 		node_decremental = "<bs>",
+			-- 		scope_incremental = false,
+			-- 	},
+			-- },
 		})
 	end,
 }
