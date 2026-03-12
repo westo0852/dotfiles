@@ -38,4 +38,9 @@ entries=(
 delimiter=" · "
 statusbar="${entries[0]}"
 for e in "${entries[@]:1}"; do statusbar+="$delimiter$e"; done
+
 echo "$statusbar"
+
+if [ "$capacity" -le 15 ] && [ "$status" != "Charging" ]; then
+  notify-send --urgency=CRITICAL "Battery low! Pls charge"
+fi
