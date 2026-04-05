@@ -13,7 +13,7 @@ return {
 				javascript = { "prettier" },
 				typescript = { "prettier" },
 			},
-			format_on_save = { -- See conform.format()
+			format_on_save = {
 				timeout_ms = 500,
 				lsp_format = "fallback",
 			},

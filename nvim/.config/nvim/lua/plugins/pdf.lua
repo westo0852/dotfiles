@@ -17,7 +17,6 @@ return {
 			"<cmd>:lua require('pdfview.renderer').previous_page()<CR>",
 			{ desc = "PDFview: Previous page" }
 		)
-
 		-- View PDF upon read
 		vim.api.nvim_create_autocmd("BufReadPost", {
 			pattern = "*.pdf",
