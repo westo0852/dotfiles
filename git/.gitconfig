@@ -11,3 +11,5 @@
 	diffFilter = diff-so-fancy --patch
 [pull]
 	rebase = true
+[url "git@github.com:"]
+	pushInsteadOf = https://github.com/

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Example: Print contents of all files with filename
+find . -type f -exec tail -n +1 {} + | wl-copy

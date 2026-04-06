@@ -42,13 +42,6 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 # End of Powerlevel10k setup
 export PATH="$HOME/.local/bin:$PATH"
 
-# Golang!
-# if [[ -d "/usr/local/go" ]]; then
-#   export PATH=$PATH:/usr/local/go/bin
-# fi
-# export GOPATH=$HOME/go
-# export PATH=$PATH:$GOPATH/bin
-
 export SSH_AUTH_SOCKET="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 export PATH="$HOME/.local/nvim-v0.12/bin:$PATH"
@@ -56,3 +49,15 @@ export PATH="$HOME/.local/nvim-v0.12/bin:$PATH"
 [[ ! -f ~/.aliases ]] || source ~/.aliases
 
 typeset -U path
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# export ANTHROPIC_AUTH_TOKEN=ollama
+# export ANTHROPIC_API_KEY=""
+# export ANTHROPIC_BASE_URL=http://localhost:11434
+
+if [[ ! $(tmux list-sessions) ]]; then 
+  tmux new -s dev
+fi
