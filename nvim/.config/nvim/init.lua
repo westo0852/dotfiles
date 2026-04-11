@@ -1,4 +1,4 @@
--- Package manager
+-- Load plugins
 require("config.lazy")
 
 vim.opt.clipboard = "unnamedplus"
@@ -17,6 +17,10 @@ vim.opt.shiftwidth = 2
 vim.opt.formatoptions:remove({ "r", "o" })
 
 vim.keymap.set("n", "<ESC>", ":noh<CR>", { desc = "Clear search highlighting", silent = true })
+
+vim.keymap.set("n", "<leader>ft", function()
+	require("fyler").open({ kind = "split_left_most" })
+end, { desc = "Open Fyler view" })
 
 -- Disable completion for markdown files
 vim.api.nvim_create_autocmd("FileType", {
