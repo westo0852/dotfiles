@@ -29,17 +29,14 @@ return {
 				},
 				path_display = "shorten",
 			},
-			-- View dots but not gitignored files
-			pickers = {
-				find_files = {
-					hidden = true,
-					-- no_ignore = true,
-				},
-				grep_string = {
-					hidden = true,
-					-- no_ignore = true,
-				},
-			},
+			-- pickers = {
+			-- 	find_files = {
+			-- 		hidden = true,
+			-- 	},
+			-- 	grep_string = {
+			-- 		hidden = true,
+			-- 	},
+			-- },
 		})
 	end,
 }

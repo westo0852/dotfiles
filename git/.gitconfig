@@ -1,8 +1,5 @@
 [init]
 	defaultBranch = main
-[user]
-	name = westo0852
-	email = 140355250+westo0852@users.noreply.github.com
 [core]
 	editor = nvim
 	excludesfile = /home/iw/.gitignore
@@ -11,5 +8,3 @@
 	diffFilter = diff-so-fancy --patch
 [pull]
 	rebase = true
-[url "git@github.com:"]
-	pushInsteadOf = https://github.com/
