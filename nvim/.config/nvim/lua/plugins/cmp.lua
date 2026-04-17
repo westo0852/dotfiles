@@ -8,12 +8,11 @@ return {
 		"hrsh7th/cmp-path", -- Use filepath
 	},
 	config = function()
+		vim.o.completeopt = "menuone,noselect"
+
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		luasnip.config.setup({})
-
-		-- Better completion
-		vim.o.completeopt = "menuone,noselect"
 
 		cmp.setup({
 			snippet = {
@@ -46,6 +45,13 @@ return {
 				{ name = "luasnip" },
 				{ name = "buffer" },
 				{ name = "path" },
+			},
+		})
+
+		cmp.setup.filetype({ "sql" }, {
+			sources = {
+				{ name = "vim-dadbod-completion" },
+				{ name = "buffer" },
 			},
 		})
 	end,

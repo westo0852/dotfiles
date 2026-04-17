@@ -28,6 +28,19 @@ local config = {
 		"--jvm-arg=-javaagent:" .. vim.fn.expand("~/.local/share/nvim/mason/packages/jdtls/lombok.jar"),
 	},
 	root_dir = project_root,
+	settings = {
+		java = {
+			configuration = {
+				runtimes = {
+					{
+						name = "Java-21",
+						path = "/usr/lib/jvm/java-21-openjdk",
+						default = true,
+					},
+				},
+			},
+		},
+	},
 	on_attach = defaults.on_attach,
 	capabilities = defaults.capabilities,
 }
