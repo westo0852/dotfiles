@@ -30,7 +30,7 @@ c.fonts.completion.entry = "14pt 'JetBrainsMono Nerd Font'"
 c.fonts.debug_console = "14pt 'JetBrainsMono Nerd Font'"
 
 # c.tabs.tree_tabs = True
-
+c.tabs.show = "multiple"
 c.tabs.position = "left"
 c.tabs.width = 400
 c.tabs.favicons.show = "never"
@@ -57,3 +57,4 @@ config.load_autoconfig()
 
 # Keybindings
 config.bind(",so", "config-source")
+config.bind(",xt", "config-cycle tabs.show multiple never")

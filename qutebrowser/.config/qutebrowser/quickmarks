@@ -3,3 +3,6 @@ qute qute://help/img/cheatsheet-big.png
 shch https://www.shellcheck.net/
 gmail https://mail.google.com/mail/u/0/#inbox
 gh https://github.com/
+ubiquiti https://10.0.0.1/network/default/dashboard
+hass http://10.0.0.3:8123/home/overview
+immich http://10.0.0.3:2283/photos
