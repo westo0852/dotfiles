@@ -33,6 +33,11 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Define functions here
 
+dev()  { cd "$PATH_TO_DEV"; }
+docs() { cd "$PATH_TO_DOCS"; }
+dots() { cd "$PATH_TO_DOTS"; }
+sbl()  { cd "$HOME/sbl"; }
+
 setup_work_macos() {
   # Java: Override with .envrc e.g. export JAVA_HOME=$(/usr/libexec/java_home -v 17)
   export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
@@ -93,18 +98,30 @@ setup_home() {
 }
 
 # Setup by environment
+# TODO Add work specific aliases e.g. ssh into boxes or devcontainer
 
 local os_type="$(uname -s)"
 case "$os_type" in
-  Darwin) setup_work_macos ;;
+  Darwin)
+    setup_work_macos
+    PATH_TO_DOCS="$HOME/OneDrive\ -\ Macquarie\ Group/Documents/notes"
+    PATH_TO_DOTS="$HOME/sbl/dots"
+    ;;
 
   Linux)
     local id_distro=$(awk -F '[="]' '$1=="ID" {print $2}' /etc/os-release)
     case "$id_distro" in
       debian|ubuntu)
-        setup_work_linux ;;
+        setup_work_linux
+        PATH_TO_DEV="$WORKSPACE"
+        PATH_TO_DOTS="/dotfiles"
+        ;;
       *)
-        setup_home ;;
+        setup_home
+        PATH_TO_DEV="$HOME/dev"
+        PATH_TO_DOCS="$HOME/docs"
+        PATH_TO_DOTS="$HOME/dotfiles"
+        ;;
     esac
     ;;
 
@@ -120,6 +137,10 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 export LESS='-R'
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases" 
+
+# Removing git checkout commands until I remember to use git switch instead
+gco() { echo 'Did you mean to run git checkout? Can you use git switch (alias: gsw) or git switch - (alias: gswb) instead?'; return 1; }
+gcob() { echo 'Did you mean to run git checkout -b? Can you use git switch -c (alias: gswc) instead?'; return 1; }
 
 # Other tools
 

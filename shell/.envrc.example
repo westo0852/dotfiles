@@ -1,0 +1,4 @@
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+PATH_add $JAVA_HOME/bin
+
+# Run direnv allow after modifying .envrc

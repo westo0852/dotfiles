@@ -1,40 +1,59 @@
+# Navigation
+
 alias ..="cd .."
 alias ...="cd ../.."
 
-alias ll="ls -alF"
-alias la="ls -A"
-alias l="ls -CF"
+alias ls="ls -Ft   --color=auto"
+alias la="ls -AFt  --color=auto" # Show hidden except . and ..
+alias ll="ls -AFlt --color=auto" # Long
+
+# Git
 
 alias gi="git init && git commit -a -m 'Initial commit'"
-alias gp="git push"
 alias gf="git fetch"
 alias gm="git merge"
+alias gp="git push"
+
+alias gs="git status -s"
+alias gss="git status"
+
+alias gb="git branch"
+
+# Removing git checkout commands until I remember to use git switch instead
+alias gsw="git switch"     # Switch to existing branch
+alias gswc="git switch -c" # Create new branch and switch to it
+alias gswb="git switch -"  # Switch back to previous branch
 
 alias ga="git add"
 alias gc="git commit -v"
 alias gcm="git commit -m"
 
 alias gd="git diff"
-alias gdn="git diff --name-only"
 alias gdc="git diff --cached"
+alias gdn="git diff --name-only"
 
-alias gs="git status -s"
-alias gl="git log --pretty=format:'%C(yellow)%h %ad%C(red)%d %Creset%s%Cblue' --date=short"
+alias gsh="git show"
+alias gshn="git show --name-only"
+alias gl="git log --pretty=format:'%C(yellow)%h %ad%Cred%d %Creset%s%Cblue' --date=short"
 
-alias gb="git branch"
-alias gco="git checkout"
-alias gcob="git checkout -b"
+# Other tools
 
-alias unstow="stow -D"
 alias nv=nvim
 
-alias tmux-a="tmux attach -t dev"
-alias tmux-n="tmux new -s dev"
+# Tmux sessions
+if command -v tmux &>/dev/null; then
+  alias tmuxn="tmux new -s"
+  alias tmuxa="tmux attach -t"
+  alias tmuxk="tmux kill-session -t"
+fi
 
+# TODO Add more clipboard support
 if command -v xclip &>/dev/null; then
   alias pbcopy="xclip -selection clipboard"
   alias pbpaste="xclip -selection clipboard -o"
 fi
 
-alias dots="cd $HOME/dotfiles"
-alias docs="cd $HOME/docs"
+# Dotfiles mgmt
+if command -v stow &>/dev/null; then
+  alias unstow="stow -D"
+fi
