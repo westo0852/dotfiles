@@ -1,28 +1,25 @@
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+# Powerlevel10k instant prompt
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input must go above this block.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Zsh settings
+
 setopt histignorealldups sharehistory inc_append_history interactive_comments
-bindkey -e
+bindkey -e # for now!
 
 HISTSIZE=5000
 SAVEHIST=5000
 HISTFILE=~/.zsh_history
 
-# Use modern completion system
+# Completion
+
 autoload -Uz compinit
 compinit
 
-# zstyle ':completion:*' auto-description 'specify: %d'
-# zstyle ':completion:*' completer _expand _complete _correct _approximate
-# zstyle ':completion:*' format 'Completing %d'
-# zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
+eval "$(dircolors -b 2>/dev/null)" # Suppress error if dircolors is missing
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
@@ -31,40 +28,119 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
-
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# p10k theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[[ ! -f ~/powerlevel10k/powerlevel10k.zsh-theme ]] || source ~/powerlevel10k/powerlevel10k.zsh-theme
+# Define functions here
 
-# End of Powerlevel10k setup
+setup_work_macos() {
+  # Java: Override with .envrc e.g. export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+  export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+  # Local install of Gradle, but can use wrapper
+  [[ -d "$HOME/gradle-6.9.3/bin" ]] && export PATH="$HOME/gradle-6.9.3/bin:$PATH"
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # Trying SQLcl for Oracle DB
+  [[ -d "$HOME/sqlcl/bin" ]] && export PATH="$HOME/sqlcl/bin:$PATH"
 
-export PATH="$HOME/.local/bin:$PATH"
+  # Misc
+  export PATH="$HOME/homebrew/bin:/opt/homebrew/bin:$PATH"
+  export PATH="$PATH:$HOME/go/bin"
+}
 
-export SSH_AUTH_SOCKET="$XDG_RUNTIME_DIR/ssh-agent.socket"
+setup_work_linux() {
+  # Java as devcontainer feature
+  if [[ -L "/usr/lib/jvm/default" ]]; then
+    export JAVA_HOME="/usr/lib/jvm/default"
+  elif [[ -L "/usr/lib/jvm/zulu1.8" ]]; then
+    export JAVA_HOME="/usr/lib/jvm/zulu1.8"
+  fi
 
-export PATH="$HOME/.local/nvim-v0.12/bin:$PATH"
+  # TODO Create gradle symlink in $HOME/.local/bin
 
-[[ ! -f ~/.aliases ]] || source ~/.aliases
+  # Added by rustup installer
+  [[ -f "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"
 
-typeset -U path
+  # Powerlevel10k, themes and plugins
+  source "$HOME/.p10k.zsh"
+  source "/usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme"
+  source "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  source "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  source "/usr/share/doc/fzf/examples/key-bindings.zsh"
+  source "/usr/share/doc/fzf/examples/completion.zsh"
+}
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+setup_home() {
+  # Provide credentials to ssh-agent
+  export SSH_AUTH_SOCKET="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-# export ANTHROPIC_AUTH_TOKEN=ollama
-# export ANTHROPIC_API_KEY=""
-# export ANTHROPIC_BASE_URL=http://localhost:11434
+  # export ANTHROPIC_AUTH_TOKEN=ollama
+  # export ANTHROPIC_API_KEY=""
+  # export ANTHROPIC_BASE_URL=http://localhost:11434
 
-if [[ ! $(tmux list-sessions) ]]; then 
+  # Java
+  if [[ -L "/usr/lib/jvm/default" ]]; then
+    export JAVA_HOME="/usr/lib/jvm/default"
+  fi
+
+  # Powerlevel10k, themes and plugins
+  source "$HOME/.p10k.zsh"
+  source "/usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme"
+  source "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  source "/usr/share/fzf/key-bindings.zsh"
+  source "/usr/share/fzf/completion.zsh"
+}
+
+# Setup by environment
+
+local os_type="$(uname -s)"
+case "$os_type" in
+  Darwin) setup_work_macos ;;
+
+  Linux)
+    local id_distro=$(awk -F '[="]' '$1=="ID" {print $2}' /etc/os-release)
+    case "$id_distro" in
+      debian|ubuntu)
+        setup_work_linux ;;
+      *)
+        setup_home ;;
+    esac
+    ;;
+
+  *) echo "Limited setup due to unknown OS: uname -s not in 'Darwin', 'Linux'" ;;
+esac
+
+# Common setup
+
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+[[ -n "$JAVA_HOME" ]] && export PATH="$JAVA_HOME/bin:$PATH"
+
+# Aliases
+
+export LESS='-R'
+[[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases" 
+
+# Other tools
+
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+  [[ -s "$NVM_DIR/bash_completion" ]]  && source "$NVM_DIR/bash_completion"
+fi
+
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+# Cleanup
+
+typeset -U path PATH # Ensure no duplicate entries in PATH
+unfunction setup_home setup_work_linux setup_work_macos
+
+# Start tmux
+
+if command -v tmux >/dev/null 2>&1 && \
+  [[ -z "$TMUX" && "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]] && \
+  ! tmux list-sessions >/dev/null 2>&1; then
+
   tmux new -s dev
 fi
