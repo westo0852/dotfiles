@@ -52,9 +52,15 @@ c.colors.webpage.darkmode.enabled = True
 c.colors.webpage.darkmode.algorithm = "lightness-cielab"
 c.colors.webpage.darkmode.policy.images = "never"
 
+c.editor.command = ["kitty", "-e", "nvim", "-f", "{file}", "-c", "normal {line}G{column0}l"]
+
 # Settings set via GUI
 config.load_autoconfig()
 
 # Keybindings
 config.bind(",so", "config-source")
 config.bind(",xt", "config-cycle tabs.show multiple never")
+config.bind(",et", "edit-text")
+config.bind(",eu", "edit-url")
+config.bind(",ec", "cmd-edit")
+config.bind(",en", "config-edit")
