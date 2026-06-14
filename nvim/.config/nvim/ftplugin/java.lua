@@ -31,11 +31,25 @@ local config = {
 	settings = {
 		java = {
 			configuration = {
+				-- Use :JdtSetRuntime or Gradle/Maven cfg with one of the below runtimes
 				runtimes = {
 					{
-						name = "Java-21",
+						-- jdtls expects string like "JavaSE-xx" or gives "LSP[jdtls] Invalid runtime"
+						name = "JavaSE-21",
 						path = "/usr/lib/jvm/java-21-openjdk",
 						default = true,
+					},
+					{
+						name = "JavaSE-17",
+						path = "/usr/lib/jvm/java-17-openjdk",
+					},
+					{
+						name = "JavaSE-11",
+						path = "/usr/lib/jvm/java-11-openjdk",
+					},
+					{
+						name = "JavaSE-1.8",
+						path = "/usr/lib/jvm/java-8-openjdk",
 					},
 				},
 			},
