@@ -76,8 +76,8 @@ setup_work_linux() {
 }
 
 setup_home() {
-  # Provide credentials to ssh-agent
-  export SSH_AUTH_SOCKET="$XDG_RUNTIME_DIR/ssh-agent.socket"
+  # Provides credentials to ssh-agent if ran systemctl --user enable --now ssh-agent
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
   # export ANTHROPIC_AUTH_TOKEN=ollama
   # export ANTHROPIC_API_KEY=""
