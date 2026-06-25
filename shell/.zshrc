@@ -147,6 +147,10 @@ fi
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
 # Cleanup
 
 typeset -U path PATH # Ensure no duplicate entries in PATH
