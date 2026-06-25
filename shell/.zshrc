@@ -49,7 +49,6 @@ setup_work_macos() {
   [[ -d "$HOME/sqlcl/bin" ]] && export PATH="$HOME/sqlcl/bin:$PATH"
 
   # Misc
-  export PATH="$HOME/homebrew/bin:/opt/homebrew/bin:$PATH"
   export PATH="$PATH:$HOME/go/bin"
 }
 
@@ -79,10 +78,6 @@ setup_home() {
   # Provides credentials to ssh-agent if ran systemctl --user enable --now ssh-agent
   export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-  # export ANTHROPIC_AUTH_TOKEN=ollama
-  # export ANTHROPIC_API_KEY=""
-  # export ANTHROPIC_BASE_URL=http://localhost:11434
-
   # Java
   if [[ -L "/usr/lib/jvm/default" ]]; then
     export JAVA_HOME="/usr/lib/jvm/default"
@@ -104,7 +99,7 @@ local os_type="$(uname -s)"
 case "$os_type" in
   Darwin)
     setup_work_macos
-    PATH_TO_DOCS="$HOME/OneDrive\ -\ Macquarie\ Group/Documents/notes"
+    PATH_TO_DOCS="$HOME/OneDrive - Macquarie Group/Documents/notes"
     PATH_TO_DOTS="$HOME/sbl/dots"
     ;;
 
