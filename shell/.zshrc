@@ -148,7 +148,7 @@ fi
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 if command -v direnv >/dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
+  source <(direnv hook zsh)
 fi
 
 # Cleanup
