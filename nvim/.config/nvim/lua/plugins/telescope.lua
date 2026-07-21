@@ -29,15 +29,13 @@ return {
 				},
 				path_display = "shorten",
 			},
-			-- View dots but not gitignored files
+			-- Get files including dots, but exclude files in .git/ and gitignored files
 			pickers = {
 				find_files = {
-					hidden = true,
-					-- no_ignore = true,
+					find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
 				},
 				grep_string = {
 					hidden = true,
-					-- no_ignore = true,
 				},
 			},
 		})

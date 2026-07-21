@@ -1,4 +1,4 @@
-# Stolen from https://gist.github.com/michaelmrose/9595075b43f24aa903fa
+set selection-clipboard clipboard
 
 # Open document in fit-width mode by default
 set adjust-open "best-fit"
