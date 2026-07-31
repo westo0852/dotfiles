@@ -91,6 +91,9 @@ exec swayidle -w \
 
 exec --no-startup-id thunar --daemon
 
+# Export environment variables for GUIs so D-Bus can see them
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
 # Moving around:
 
     # Move your focus around
@@ -244,6 +247,8 @@ bar {
 # Take screenshot and save it to pics dir and clipboard
 bindsym $mod+Control+4 exec grim -g "$(slurp)" - | \
   tee "$HOME/pics/screenshot_$(date '+%Y%m%d-%H%M%S').png" | wl-copy
+
+bindsym $mod+Escape exec makoctl dismiss
 
 # Pretty stuff like colours!
 font pango:JetBrainsMono Nerd Font Italic 16
