@@ -53,6 +53,16 @@ local config = {
 					},
 				},
 			},
+			imports = {
+				gradle = {
+					wrapper = {
+						checksums = {
+							{sha256: "497c8c2a7e5031f6aa847f88104aa80a93532ec32ee17bdb8d1d2f67a194a9c7",
+"allowed": true}
+						},
+					},
+				},
+			},
 		},
 	},
 	on_attach = defaults.on_attach,
