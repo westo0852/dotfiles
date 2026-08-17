@@ -1,16 +1,24 @@
 #!/bin/bash
-
 # Used for status bar in ~/.config/sway/config
 
 identity="$USER@$HOSTNAME"
 
-cpu="$(top -bn2 -d 1 | grep "Cpu(s)" | tail -1 | awk '{print 100 - $8}')"
+mem_total_kb=$(awk '/MemTotal:/ {print $2}' /proc/meminfo)
+mem_avail_kb=$(awk '/MemAvailable:/ {print $2}' /proc/meminfo)
+mem_used_kb=$((mem_total_kb - mem_avail_kb))
 
-ssid=$(command -v iwgetid &>/dev/null && iwgetid -r || "unknown")
-ipv4=$(ip addr show wlan0 | rg "inet " | awk '{print $2}' | cut -d"/" -f1)
+ram_pct=$((mem_used_kb * 100 / mem_total_kb))
+ram_used=$(numfmt --to=iec $((mem_used_kb * 1024)))
+ram_total=$(numfmt --to=iec $((mem_total_kb * 1024)))
 
-received=$(cat /sys/class/net/wlan0/statistics/rx_bytes | numfmt --to=iec-i)
-transmitted=$(cat /sys/class/net/wlan0/statistics/tx_bytes | numfmt --to=iec-i)
+# Service set identifier: wireless network name
+ssid=$(command -v iwgetid &>/dev/null && iwgetid -r || echo "unknown")
+[[ -n "$ssid" ]] || ssid="?"
+ipv4=$(ip addr show wlan0 2>/dev/null | rg "inet " | awk '{print $2}' | cut -d"/" -f1)
+[[ -n "$ipv4" ]] && wifi_status="Connected to $ssid ($ipv4)" || wifi_status="Not connected"
+
+# received=$(cat /sys/class/net/wlan0/statistics/rx_bytes | numfmt --to=iec-i)
+# transmitted=$(cat /sys/class/net/wlan0/statistics/tx_bytes | numfmt --to=iec-i)
 
 capacity="$(cat /sys/class/power_supply/BAT1/capacity)"
 status="$(cat /sys/class/power_supply/BAT1/status)"
@@ -25,12 +33,12 @@ datetime=$(date "+%A %+4Y-%m-%d %H:%M")
 
 entries=(
   # "CPU: $cpu%"
+  "RAM: ${ram_used}/${ram_total} (${ram_pct}%)"
+  # "$received down, $transmitted up"
   "Volume: $volume"
   "Light: $light%"
   "Power: $capacity% ($status)"
-  # "WiFi: $ssid" ($ipv4)
-  "$ssid"
-  # "$received down, $transmitted up"
+  "$wifi_status"
   "$identity"
   "$datetime"
 )
@@ -41,6 +49,13 @@ for e in "${entries[@]:1}"; do statusbar+="$delimiter$e"; done
 
 echo "$statusbar"
 
+notif_shown="/tmp/swaybar_battery_low"
+
 if [ "$capacity" -le 15 ] && [ "$status" != "Charging" ]; then
-  notify-send --urgency=CRITICAL "Battery low! Pls charge"
+  if [ ! -f "$notif_shown" ]; then
+    notify-send --urgency=CRITICAL "Battery low! Pls charge"
+    touch "$notif_shown"
+  fi
+else
+  rm -f "$notif_shown"
 fi
