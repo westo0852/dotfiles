@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
 TEX_INPUT=resume.tex
 if [[ $# -eq 1 ]]; then TEX_INPUT="$1"; fi
 echo "About to compile $TEX_INPUT to pdf..."
-pdflatex "$TEX_INPUT"
+pdflatex "$TEX_INPUT" >pdflatex-stdout.log 2>pdflatex-stderr.log
 
 PDF_OUTPUT="${TEX_INPUT%.tex}.pdf"
 echo "About to open $PDF_OUTPUT with zathura..."
-zathura "$PDF_OUTPUT"
+zathura "$PDF_OUTPUT" >zathura-stdout.log 2>zathura-stderr.log

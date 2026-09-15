@@ -133,10 +133,6 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export LESS='-R'
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases" 
 
-# Removing git checkout commands until I remember to use git switch instead
-gco() { echo 'Did you mean to run git checkout? Can you use git switch (alias: gsw) or git switch - (alias: gswb) instead?'; return 1; }
-gcob() { echo 'Did you mean to run git checkout -b? Can you use git switch -c (alias: gswc) instead?'; return 1; }
-
 # Other tools
 
 if [ -d "$HOME/.nvm" ]; then
