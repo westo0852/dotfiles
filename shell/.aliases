@@ -57,3 +57,28 @@ fi
 if command -v stow &>/dev/null; then
   alias unstow="stow -D"
 fi
+
+# Function ideas
+
+nvp() {
+  "$@" | xargs -o nvim -p
+}
+
+devpull() {
+  target="$1"
+  for var in "${@:2}"; do cp "$1"/"$item" "$item"; done
+}
+
+# Run WIP tests (in hindsight, could ./gradlew test --continuous)
+gradletest() {
+  cmd="./gradlew test"
+
+  git status --porcelain | \
+  awk '{if ($1 != "D") print ($1 == "R") ? $4 : $2;}' | \
+  grep '^src/test' | \
+  awk -F'/' '{print $NF}' | \
+  while IFS= read -r test; do cmd+=" --tests $test"; done
+
+  echo "$cmd"
+  eval "$cmd"
+}
