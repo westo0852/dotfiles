@@ -6,10 +6,13 @@
 [core]
 	editor = nvim
 	excludesfile = /home/iw/.gitignore
-	pager = diff-so-fancy | less --tabs=4 -RF
+	pager = delta
 [interactive]
-	diffFilter = diff-so-fancy --patch
+	diffFilter = delta --color-only
 [pull]
 	rebase = true
 [url "git@github.com:"]
 	pushInsteadOf = https://github.com/
+[delta]
+  navigate = true # use n and N to move between diff sections
+  dark = true
