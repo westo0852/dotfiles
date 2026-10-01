@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Redirect output to stderr
+exec 1>&2
+
+# Determine "against" commit: HEAD if exists, else empty tree object
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  against=HEAD
+else
+  against=$(git hash-object -t tree /dev/null)
+fi
+
+# Print filenames with whitespace errors and fail
+if ! git diff-index --check --cached "$against" --; then
+  echo "Failed whitespace check."
+  exit 1
+fi
+
+LOG_FILE=/tmp/gradle-precommit.log
+if [ -f "$LOG_FILE" ]; then rm "$LOG_FILE"; fi
+touch "$LOG_FILE"
+
+if ! ./gradlew checkFormat --console=plain >"$LOG_FILE" 2>&1; then
+  echo "Failed Java format check. See $LOG_FILE"
+  echo "Try running ./gradlew format"
+  exit 1
+fi
+rm "$LOG_FILE"
+
+# if ! ./gradlew checkstyleMain checkstyleTest --console=plain >"$LOG_FILE" 2>&1; then
+#   echo "WARNING: Failed Java checkstyle."
+#   echo "Gradle output starts here:"
+#   cat "$LOG_FILE"
+# fi
+# rm "$LOG_FILE"
+
+if ! ./gradlew classes testClasses --console=plain >"$LOG_FILE" 2>&1; then
+  echo "Failed Gradle compilation check. See $LOG_FILE"
+  exit 1
+fi

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Redirect output to stderr
+exec 1>&2
+
+echo "Running Gradle checks..."
+
+LOG_FILE=/tmp/gradle-prepush.log
+if [ -f "$LOG_FILE" ]; then rm "$LOG_FILE"; fi
+touch "$LOG_FILE"
+
+# Build and test
+if ./gradlew clean check --console=plain --warn >"$LOG_FILE" 2>&1; then
+  echo "Failed Gradle compilation check. Last 20 lines:"
+  tail -n 20 "$LOG_FILE"
+  echo "Read full output in $LOG_FILE"
+  exit 1
+fi
