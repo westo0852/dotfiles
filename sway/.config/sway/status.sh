@@ -3,14 +3,6 @@
 
 identity="$USER@$HOSTNAME"
 
-mem_total_kb=$(awk '/MemTotal:/ {print $2}' /proc/meminfo)
-mem_avail_kb=$(awk '/MemAvailable:/ {print $2}' /proc/meminfo)
-mem_used_kb=$((mem_total_kb - mem_avail_kb))
-
-ram_pct=$((mem_used_kb * 100 / mem_total_kb))
-ram_used=$(numfmt --to=iec $((mem_used_kb * 1024)))
-ram_total=$(numfmt --to=iec $((mem_total_kb * 1024)))
-
 # Service set identifier: wireless network name
 ssid=$(command -v iwgetid &>/dev/null && iwgetid -r || echo "unknown")
 [[ -n "$ssid" ]] || ssid="?"
@@ -33,7 +25,6 @@ datetime=$(date "+%A %+4Y-%m-%d %H:%M")
 
 entries=(
   # "CPU: $cpu%"
-  "RAM: ${ram_used}/${ram_total} (${ram_pct}%)"
   # "$received down, $transmitted up"
   "Volume: $volume"
   "Light: $light%"
