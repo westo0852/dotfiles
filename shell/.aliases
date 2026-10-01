@@ -19,10 +19,10 @@ alias gss="git status"
 
 alias gb="git branch"
 
-# Removing git checkout commands until I remember to use git switch instead
 alias gsw="git switch"     # Switch to existing branch
 alias gswc="git switch -c" # Create new branch and switch to it
 alias gswb="git switch -"  # Switch back to previous branch
+alias gco="git checkout"
 
 alias ga="git add"
 alias gc="git commit -v"
@@ -35,6 +35,9 @@ alias gdn="git diff --name-only"
 alias gsh="git show"
 alias gshn="git show --name-only"
 alias gl="git log --pretty=format:'%C(yellow)%h %ad%Cred%d %Creset%s%Cblue' --date=short"
+
+alias gst="git stash"
+gstn() { git stash show "stash@{$1}"; }
 
 # Other tools
 

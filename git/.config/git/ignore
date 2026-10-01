@@ -1,0 +1,14 @@
+tmp/
+temp/
+temp.*
+
+.venv/
+
+.env
+!.env.example
+
+build/
+out/
+
+*.jar
+!gradle-wrapper.jar

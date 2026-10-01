@@ -2,12 +2,17 @@
 	defaultBranch = main
 [user]
 	name = westo0852
-	email = 140355250+westo0852@users.noreply.github.com
+	email = iweston1702@gmail.com
 [core]
 	editor = nvim
-	excludesfile = /home/iw/.gitignore
 	pager = diff-so-fancy | less --tabs=4 -RF
 [pull]
 	rebase = true
 [url "git@github.com:"]
 	pushInsteadOf = https://github.com/
+[commit]
+	verbose = true
+[stash]
+	showPatch = true
+[push]
+	autoSetupRemote = true

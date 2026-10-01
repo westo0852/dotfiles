@@ -1,7 +1,0 @@
-temp/
-temp.*
-
-.venv/
-
-.env
-!.env.example
