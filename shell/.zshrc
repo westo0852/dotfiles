@@ -8,6 +8,7 @@ fi
 
 setopt histignorealldups sharehistory inc_append_history interactive_comments
 bindkey -e # for now!
+bindkey '^F' history-incremental-search-forward
 
 HISTSIZE=5000
 SAVEHIST=5000
