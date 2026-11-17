@@ -8,7 +8,7 @@ return {
 				sh = { "shfmt" },
 				cpp = { "clang-format" },
 				c = { "clang-format" },
-				java = { "clang-format" },
+				java = { "google-java-formatter" },
 				go = { "gofumpt", "goimports" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },

@@ -19,8 +19,10 @@ return {
 				"pyright",
 				"clangd",
 				"jdtls",
+				"kotlin_lsp",
 				"ts_ls",
 				"bashls",
+				"rust_analyzer",
 			},
 			handlers = {},
 		})
@@ -35,6 +37,7 @@ return {
 				"prettier",
 				"black",
 				"clang-format",
+				"google-java-format",
 				"shellcheck",
 			},
 		})
@@ -60,11 +63,17 @@ return {
 		-- Python
 		default_lsp_setup("pyright")
 
+		-- Kotlin
+		default_lsp_setup("kotlin_lsp")
+
 		-- Typescript
 		default_lsp_setup("ts_ls")
 
 		-- Bash
 		default_lsp_setup("bashls")
+
+		-- Rust
+		default_lsp_setup("rust_analyzer")
 
 		-- Lua
 		vim.lsp.config("lua_ls", {
