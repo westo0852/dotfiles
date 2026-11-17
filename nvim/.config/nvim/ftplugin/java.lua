@@ -65,6 +65,11 @@ local config = {
 					},
 				},
 			},
+			project = {
+				referencedLibraries = {
+					"lib/**/*.jar",
+				},
+			},
 		},
 	},
 	on_attach = defaults.on_attach,
