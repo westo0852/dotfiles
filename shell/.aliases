@@ -42,6 +42,7 @@ gstn() { git stash show "stash@{$1}"; }
 # Other tools
 
 alias nv=nvim
+alias hl="ssh iw@homelab"
 
 # Tmux sessions
 if command -v tmux &>/dev/null; then
